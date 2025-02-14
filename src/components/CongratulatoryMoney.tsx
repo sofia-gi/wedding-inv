@@ -29,7 +29,7 @@ const Content = styled("p", {
 });
 
 const SubContent = styled("p", {
-  fontSize: "1.3vh",
+  fontSize: "1.7vh",
   lineHeight: 1.75,
   opacity: 0.75,
   marginBottom: 24,

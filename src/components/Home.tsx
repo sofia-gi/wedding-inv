@@ -26,11 +26,12 @@ const Footer = {
     opacity: 0.6,
     textAlign: "center" as const,
     width: "100%",
-    height: "100px",
+    height: "30px",
     display: "flex",
-    alignItems: "center",
+    alignItems: "end",
     justifyContent: "center",
     flexDirection: "column" as const,
+    fontSize: "8px"
 };
 
 const Home: React.FC = () => {
