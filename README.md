@@ -10,7 +10,7 @@
 
 
 
-🔗 **[💌 청첩장 미리보기](https://your-wedding-invitation-url.com/)**  
+🔗 **[💌 청첩장 미리보기](https://sofia-gi.github.io/wedding-inv/)**  
 
 ---
 
