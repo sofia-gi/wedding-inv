@@ -1,7 +1,9 @@
 import React from "react";
-import { styled } from "@stitches/react";
+//import { styled } from "@stitches/react";
+import styled from '@emotion/styled'; 
 
-const Wrapper = styled("div", {
+
+const Wrapper = styled.div`
   background: "var(--secondary-color)",
   width: "100%",
   padding: "80px 0",
@@ -17,19 +19,15 @@ const Wrapper = styled("div", {
     backgroundImage: "url('data:image/svg+xml;utf8,<svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"1\" height=\"1\" fill=\"rgba(166, 124, 82, 0.05)\" /></svg>')",
     opacity: 0.8,
     zIndex: 0
-  }
-});
+  }`;
 
-const Container = styled("div", {
-  maxWidth: "900px",
+const Container = styled.div`maxWidth: "900px",
   margin: "0 auto",
   padding: "0 20px",
   position: "relative",
-  zIndex: 1
-});
+  zIndex: 1`;
 
-const Title = styled("h2", {
-  fontSize: "2rem",
+const Title = styled.h2`fontSize: "2rem",
   fontWeight: 500,
   color: "var(--accent-color)",
   textAlign: "center",
@@ -44,26 +42,33 @@ const Title = styled("h2", {
     width: "50px",
     height: "1px",
     backgroundColor: "var(--primary-color)"
-  }
-});
+  }`;
 
-const MapContainer = styled("div", {
-  borderRadius: "8px",
-  overflow: "hidden",
-  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)",
-  backgroundColor: "var(--white)",
-  padding: "20px",
-  marginBottom: "30px"
-});
+const MapContainer = styled.div`
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  background-color: var(--white);
+  padding: 20px;
+  margin-bottom: 30px;
+  max-width: 600px;  // 적당한 최대 너비 지정
+  margin-left: auto;
+  margin-right: auto;
+`;
 
-const Image = styled("img", {
-  width: "100%",
+const StyledImage = styled.img`
+  width: 100%;
+  height: auto;
+  display: block;
+`;
+
+
+
+const Image = styled.img`width: "100%",
   maxWidth: "100%",
-  borderRadius: "4px"
-});
+  borderRadius: "4px"`;
 
-const InfoWrapper = styled("div", {
-  marginTop: "40px",
+const InfoWrapper = styled.div`marginTop: "40px",
   display: "flex",
   justifyContent: "space-between",
   flexWrap: "wrap",
@@ -71,11 +76,9 @@ const InfoWrapper = styled("div", {
   
   "@media (max-width: 768px)": {
     flexDirection: "column"
-  }
-});
+  }`;
 
-const InfoBox = styled("div", {
-  flex: "1",
+const InfoBox = styled.div`flex: "1",
   backgroundColor: "var(--white)",
   borderRadius: "8px",
   padding: "25px",
@@ -109,8 +112,7 @@ const InfoBox = styled("div", {
   "& .icon": {
     marginRight: "8px",
     color: "var(--accent-color)"
-  }
-});
+  }`;
 
 export default function Location() {
   return (
@@ -119,8 +121,12 @@ export default function Location() {
         <Title>오시는 길</Title>
         
         <MapContainer>
-          <Image src="./assets/LocationMap.png" alt="안양 빌라드지디 갤러리아홀 지도" />
-        </MapContainer>
+        <StyledImage
+          src="/assets/LocationMap.png"
+          alt="안양 빌라드지디 갤러리아홀 지도"
+          loading="lazy"
+        />
+      </MapContainer>
         
         <InfoWrapper>
           <InfoBox>

@@ -77,8 +77,8 @@ const GalleryWrapper = styled("div", {
 const images = Array.from({ length: 20 }, (_, i) => {
   const num = i + 1;
   return {
-    original: `./asset/m${num}.JPG`,
-    thumbnail: `./asset/m${num}.JPG`,
+    original: `./asset/m${num}.jpg`,
+    thumbnail: `./asset/m${num}.jpg`,
     originalAlt: "웨딩 사진",
     thumbnailAlt: "웨딩 사진 썸네일"
   };
