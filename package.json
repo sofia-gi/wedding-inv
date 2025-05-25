@@ -2,7 +2,7 @@
   "name": "m-wedding-inv",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://sofia-gi.github.io/wedding-inv/",
+  "homepage": "https://sofia-gi.github.io/wedding-inv",
   "dependencies": {
     "@ant-design/icons": "^5.6.1",
     "@stitches/react": "^1.2.8",
@@ -22,11 +22,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d builds",
+    "build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": [
