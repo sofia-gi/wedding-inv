@@ -1,21 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import { HashRouter as Router, Route, Routes } from 'react-router-dom';
-import './App.css';
+import React, { Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-// 페이지 컴포넌트
-import Home from './components/Home';
-import About from './components/About';
+const Home = lazy(() => import('./components/Home'));
+const About = lazy(() => import('./components/About'));
 
 const App: React.FC = () => {
   return (
-      <Router>
+    <Router>
+      <Suspense fallback={<div>로딩중...</div>}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
         </Routes>
-      </Router>
+      </Suspense>
+    </Router>
   );
 };
-
-export default App;

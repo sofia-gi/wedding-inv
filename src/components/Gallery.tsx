@@ -10,10 +10,10 @@ const Wrapper = styled("div", {
   position: "relative"
 });
 
-const Container = styled("div", {
-  maxWidth: "1000px",
-  margin: "0 auto",
-  padding: "0 20px"
+const Container = styled('div', {
+  maxWidth: '1200px',
+  margin: '0 auto',
+  padding: '1rem',
 });
 
 const Title = styled("h2", {

@@ -8,10 +8,10 @@ const Wrapper = styled("div", {
   padding: "60px 20px",
 });
 
-const Container = styled("div", {
-  maxWidth: "700px",
-  margin: "0 auto",
-  textAlign: "center"
+const Container = styled('div', {
+  maxWidth: '1200px',
+  margin: '0 auto',
+  padding: '1rem',
 });
 
 const Title = styled("h2", {
