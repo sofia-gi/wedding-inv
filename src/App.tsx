@@ -9,7 +9,7 @@ import About from './components/About';
 
 const App: React.FC = () => {
   return (
-      <Router>
+      <Router basename="/wedding-inv">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
