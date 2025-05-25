@@ -1,5 +1,4 @@
 import React from 'react';
-import { CheckCircleTwoTone } from "@ant-design/icons";
 import { styled } from "@stitches/react";
 import { Button, Divider, Modal, message } from "antd";
 import { useState } from "react";
@@ -7,47 +6,180 @@ import CopyToClipboard from "react-copy-to-clipboard";
 import { WeddingData } from "../types";
 
 const Wrapper = styled("div", {
-  background: "#efebe9",
-  backgroundImage: "url(./assets/GroovePaper.png)",
-  paddingBottom: 18,
+  background: "var(--white)",
   width: "100%",
-  textAlign: "center",
+  padding: "80px 0",
+  position: "relative"
 });
 
-const Title = styled("p", {
-  fontSize: "2vh",
-  fontWeight: "bold",
-  opacity: 0.85,
-  marginBottom: 0,
+const Container = styled("div", {
+  maxWidth: "800px",
+  margin: "0 auto",
+  padding: "0 20px"
+});
+
+const Title = styled("h2", {
+  fontSize: "2rem",
+  fontWeight: 500,
+  color: "var(--accent-color)",
+  textAlign: "center",
+  marginBottom: "3rem",
+  position: "relative",
+  "&::after": {
+    content: '""',
+    position: "absolute",
+    bottom: "-10px",
+    left: "50%",
+    transform: "translateX(-50%)",
+    width: "50px",
+    height: "1px",
+    backgroundColor: "var(--primary-color)"
+  }
 });
 
 const Content = styled("p", {
-  fontSize: "1.5vh",
-  lineHeight: 1.75,
-  opacity: 0.75,
-  marginBottom: 24,
+  fontSize: "1.1rem",
+  lineHeight: 1.8,
+  color: "var(--text-color)",
+  marginBottom: "40px",
+  textAlign: "center"
 });
 
-const SubContent = styled("p", {
-  fontSize: "1.7vh",
-  lineHeight: 1.75,
-  opacity: 0.75,
-  marginBottom: 24,
-});
-
-const Description = styled("p", {
-  fontSize: "1.6vh",
-  lineHeight: 1.75,
-  opacity: 0.65,
-  marginTop: 8,
+const ButtonsWrapper = styled("div", {
+  display: "flex",
+  justifyContent: "center",
+  gap: "40px",
+  flexWrap: "wrap",
+  
+  "@media (max-width: 600px)": {
+    gap: "20px"
+  }
 });
 
 const ContactButton = styled("div", {
-  display: "inline-block",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "180px",
+  height: "180px",
+  borderRadius: "12px",
+  backgroundColor: "var(--secondary-color)",
+  boxShadow: "0 5px 20px rgba(0, 0, 0, 0.05)",
+  cursor: "pointer",
+  transition: "var(--transition)",
+  
+  "&:hover": {
+    transform: "translateY(-5px)",
+    boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)"
+  },
+  
+  "@media (max-width: 600px)": {
+    width: "150px",
+    height: "150px"
+  }
+});
+
+const ButtonIcon = styled("div", {
+  fontSize: "40px",
+  marginBottom: "15px",
+  color: "var(--accent-color)"
+});
+
+const ButtonText = styled("p", {
+  fontSize: "1.1rem",
+  fontWeight: 500,
+  color: "var(--text-color)",
+  margin: 0
+});
+
+const StyledModal = {
+  content: {
+    borderRadius: "12px",
+    overflow: "hidden"
+  },
+  header: {
+    backgroundColor: "var(--primary-color)",
+    borderBottom: "none",
+    padding: "16px 24px",
+  },
+  title: {
+    color: "var(--white)",
+    fontSize: "1.3rem",
+    fontWeight: 500,
+    textAlign: "center"
+  },
+  body: {
+    padding: "30px"
+  },
+  mask: {
+    backdropFilter: "blur(2px)"
+  },
+  footer: {
+    display: "none"
+  },
+  closeIcon: {
+    color: "var(--white)"
+  }
+};
+
+const AccountInfo = styled("div", {
+  backgroundColor: "var(--secondary-color)",
+  borderRadius: "8px",
+  padding: "20px",
+  marginBottom: "20px",
+  
+  "& .account-header": {
+    display: "flex",
+    alignItems: "center",
+    marginBottom: "10px",
+    
+    "& .account-emoji": {
+      fontSize: "24px",
+      marginRight: "10px"
+    },
+    
+    "& .account-name": {
+      fontSize: "1.1rem",
+      fontWeight: 500
+    }
+  },
+  
+  "& .account-number-wrapper": {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: "var(--white)",
+    borderRadius: "6px",
+    padding: "12px 15px",
+    
+    "& .account-number": {
+      fontSize: "1rem",
+      color: "var(--text-color)"
+    }
+  },
+  
+  "& .copy-button": {
+    backgroundColor: "var(--primary-color)",
+    color: "var(--white)",
+    border: "none",
+    borderRadius: "4px",
+    padding: "5px 12px",
+    fontSize: "0.9rem",
+    cursor: "pointer",
+    transition: "var(--transition)",
+    
+    "&:hover": {
+      backgroundColor: "var(--accent-color)"
+    }
+  }
+});
+
+const Description = styled("p", {
+  fontSize: "0.9rem",
+  color: "var(--light-text)",
   textAlign: "center",
-  marginLeft: 24,
-  marginRight: 24,
-  marginBottom: 24,
+  marginTop: "15px"
 });
 
 type CongratulatoryMoneyProps = {
@@ -62,151 +194,89 @@ export default function CongratulatoryMoney({
 
   return (
     <Wrapper>
-      <Divider plain style={{ marginTop: 0, marginBottom: 32 }}>
+      <Container>
         <Title>축하의 마음을 전하세요</Title>
-      </Divider>
-      <Content>축하의 마음을 담아 축의금을 전달해 보세요.</Content>
-      <ContactButton onClick={() => setGroomVisible(true)}>
-        <CheckCircleTwoTone
-          style={{ fontSize: 64, marginBottom: 16 }}
-          twoToneColor="#829fe0"
-        />
-        <br />
-        <SubContent>신랑측 계좌번호 확인</SubContent>
-      </ContactButton>
-      <ContactButton onClick={() => setBrideVisible(true)}>
-        <CheckCircleTwoTone
-          style={{ fontSize: 64, marginBottom: 16 }}
-          twoToneColor="#fe7daf"
-        />
-        <br />
-        <SubContent>신부측 계좌번호 확인</SubContent>
-      </ContactButton>
+        <Content>소중한 축하의 마음을 담아 축의금을 전달해 보세요.</Content>
+        
+        <ButtonsWrapper>
+          <ContactButton onClick={() => setGroomVisible(true)}>
+            <ButtonIcon>🤵</ButtonIcon>
+            <ButtonText>신랑측 계좌번호</ButtonText>
+          </ContactButton>
+          
+          <ContactButton onClick={() => setBrideVisible(true)}>
+            <ButtonIcon>👰</ButtonIcon>
+            <ButtonText>신부측 계좌번호</ButtonText>
+          </ContactButton>
+        </ButtonsWrapper>
+      </Container>
+      
       <Modal
-        title={<b>신랑측 계좌번호</b>}
+        title="신랑측 계좌번호"
         open={groomVisible}
         onOk={() => setGroomVisible(false)}
         onCancel={() => setGroomVisible(false)}
         cancelButtonProps={{ style: { display: "none" } }}
         okButtonProps={{ style: { display: "none" } }}
         footer={null}
+        styles={StyledModal}
       >
-        {/*{data?.groom?.parents?.father && (
-          <div>
-            <b>부) {data?.groom?.parents?.father?.name}</b>
-            <Divider type="vertical" />
-            <CopyToClipboard
-              text={data?.groom?.parents?.father?.account_number}
-            >
-              <Button
-                type="text"
-                style={{ padding: 0, margin: 0 }}
-                onClick={() => message.success("계좌번호가 복사되었습니다.")}
-              >
-                {data?.groom?.parents?.father?.account_number}
-              </Button>
-            </CopyToClipboard>
-          </div>
-        )}
-        {data?.groom?.parents?.mother && (
-          <div style={{ marginTop: 24, marginBottom: 24 }}>
-            <b>모) {data?.groom?.parents?.mother.name}</b>
-            <Divider type="vertical" />
-            <CopyToClipboard text={data?.groom?.parents?.mother.account_number}>
-              <Button
-                type="text"
-                style={{ padding: 0, margin: 0 }}
-                onClick={() => message.success("계좌번호가 복사되었습니다.")}
-              >
-                {data?.groom?.parents?.mother.account_number}
-              </Button>
-            </CopyToClipboard>
-          </div>
-        )}*/}
         {data?.groom && (
-          <div>
-            <b>🤵신랑 {data?.groom?.name}</b>
-            <Divider type="vertical" />
-            <CopyToClipboard text={data?.groom?.account_number}>
-              <Button
-                type="text"
-                style={{ padding: 0, margin: 0 }}
-                onClick={() => message.success("계좌번호가 복사되었습니다.")}
-              >
-                {data?.groom?.account_number}
-              </Button>
-            </CopyToClipboard>
-          </div>
+          <AccountInfo>
+            <div className="account-header">
+              <span className="account-emoji">🤵</span>
+              <span className="account-name">{data?.groom?.name}</span>
+            </div>
+            <div className="account-number-wrapper">
+              <div className="account-number">{data?.groom?.account_number}</div>
+              <CopyToClipboard text={data?.groom?.account_number}>
+                <button 
+                  className="copy-button"
+                  onClick={() => message.success("계좌번호가 복사되었습니다.")}
+                >
+                  복사하기
+                </button>
+              </CopyToClipboard>
+            </div>
+          </AccountInfo>
         )}
-        <div>
-          <Description>
-            계좌번호 클릭시, 붙여넣기 가능한 텍스트로 복사됩니다.
-          </Description>
-        </div>
+        <Description>
+          '복사하기' 버튼을 클릭하면 계좌번호가 클립보드에 복사됩니다.
+        </Description>
       </Modal>
+      
       <Modal
-        title={<b>신부측 계좌번호</b>}
+        title="신부측 계좌번호"
         open={brideVisible}
         onOk={() => setBrideVisible(false)}
         onCancel={() => setBrideVisible(false)}
         cancelButtonProps={{ style: { display: "none" } }}
         okButtonProps={{ style: { display: "none" } }}
         footer={null}
+        styles={StyledModal}
       >
-        {/*{data?.bride?.parents?.father && (
-          <div>
-            <b>부) {data?.bride?.parents?.father?.name}</b>
-            <Divider type="vertical" />
-            <CopyToClipboard
-              text={data?.bride?.parents?.father?.account_number}
-            >
-              <Button
-                type="text"
-                style={{ padding: 0, margin: 0 }}
-                onClick={() => message.success("계좌번호가 복사되었습니다.")}
-              >
-                {data?.bride?.parents?.father?.account_number}
-              </Button>
-            </CopyToClipboard>
-          </div>
-        )}
-        {data?.bride?.parents?.mother && (
-          <div style={{ marginTop: 24, marginBottom: 24 }}>
-            <b>모) {data?.bride?.parents?.mother?.name}</b>
-            <Divider type="vertical" />
-            <CopyToClipboard
-              text={data?.bride?.parents?.mother?.account_number}
-            >
-              <Button
-                type="text"
-                style={{ padding: 0, margin: 0 }}
-                onClick={() => message.success("계좌번호가 복사되었습니다.")}
-              >
-                {data?.bride?.parents?.mother?.account_number}
-              </Button>
-            </CopyToClipboard>
-          </div>
-        )}*/}
         {data?.bride && (
-          <div>
-            <b>👰신부 {data?.bride?.name}</b>
-            <Divider type="vertical" />
-            <CopyToClipboard text={data?.bride?.account_number}>
-              <Button
-                type="text"
-                style={{ padding: 0, margin: 0 }}
-                onClick={() => message.success("계좌번호가 복사되었습니다.")}
-              >
-                {data?.bride?.account_number}
-              </Button>
-            </CopyToClipboard>
-          </div>
+          <AccountInfo>
+            <div className="account-header">
+              <span className="account-emoji">👰</span>
+              <span className="account-name">{data?.bride?.name}</span>
+            </div>
+            <div className="account-number-wrapper">
+              <div className="account-number">{data?.bride?.account_number}</div>
+              <CopyToClipboard text={data?.bride?.account_number}>
+                <button 
+                  className="copy-button"
+                  onClick={() => message.success("계좌번호가 복사되었습니다.")}
+                >
+                  복사하기
+                </button>
+              </CopyToClipboard>
+            </div>
+          </AccountInfo>
         )}
-        <div>
-          <Description>
-            계좌번호 클릭시, 붙여넣기 가능한 텍스트로 복사됩니다.
-          </Description>
-        </div>
+        <Description>
+          '복사하기' 버튼을 클릭하면 계좌번호가 클립보드에 복사됩니다.
+        </Description>
       </Modal>
     </Wrapper>
   );

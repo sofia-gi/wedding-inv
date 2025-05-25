@@ -1,6 +1,5 @@
 import React from "react";
 import { styled } from "@stitches/react";
-import { Divider } from "antd";
 import { WeddingData } from "../types";
 
 const Layout = styled("div", {
@@ -9,25 +8,36 @@ const Layout = styled("div", {
   overflow: "hidden",
   margin: "0px auto",
   position: "relative",
+  "&::after": {
+    content: '""',
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgba(0,0,0,0.2)",
+    zIndex: 1
+  }
 });
 
 const TitleWrapper = styled("div", {
   position: "absolute",
-  width: "100%",
-  top: "20%",
+  width: "90%",
+  maxWidth: "600px",
+  top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
   textAlign: "center",
-  textShadow: "-1px 0 #9e9e9e, 0 1px #9e9e9e, 1px 0 #9e9e9e, 0 -1px #9e9e9e",
-  animation: "fadein 3s",
-  "-moz-animation": "fadein 3s" /* Firefox */,
-  "-webkit-animation": "fadein 3s" /* Safari and Chrome */,
-  "-o-animation": "fadein 3s" /* Opera */,
+  color: "var(--white)",
+  zIndex: 2,
+  animation: "fadeIn 2s ease-in-out",
+  "@keyframes fadeIn": {
+    "0%": { opacity: 0, transform: "translate(-50%, -45%)" },
+    "100%": { opacity: 1, transform: "translate(-50%, -50%)" }
+  }
 });
 
 const VideoBackground = styled("video", {
-  backgroundColor: "#aeb8b3 !important",
-  opacity: 0.9,
   objectFit: "cover",
   objectPosition: "center center",
   width: "100%",
@@ -36,22 +46,62 @@ const VideoBackground = styled("video", {
 });
 
 const WeddingInvitation = styled("p", {
-  fontSize: "1.5vh",
-  opacity: 0.45,
-  marginBottom: 16,
+  fontFamily: "'Great Vibes', cursive",
+  fontSize: "2.5rem",
+  marginBottom: "1.5rem",
+  fontWeight: 400,
+  letterSpacing: "2px",
+  color: "var(--white)",
 });
 
 const GroomBride = styled("p", {
-  fontSize: "3.5vh",
-  fontWeight: "bold",
-  opacity: 0.9,
-  marginBottom: 16,
+  fontSize: "1.8rem",
+  fontWeight: 500,
+  margin: "1.5rem 0",
+  fontFamily: "'Noto Serif KR', serif",
+  letterSpacing: "1px",
+  position: "relative",
+  paddingBottom: "1.5rem",
+  "&::after": {
+    content: '""',
+    position: "absolute",
+    bottom: 0,
+    left: "50%",
+    transform: "translateX(-50%)",
+    width: "80px",
+    height: "1px",
+    backgroundColor: "var(--white)",
+  }
 });
 
-const Schedule = styled("p", {
-  fontSize: "2vh",
-  opacity: 0.65,
-  marginBottom: 24,
+const Schedule = styled("div", {
+  fontSize: "1.2rem",
+  marginTop: "2rem",
+  lineHeight: 1.7,
+  fontWeight: 300,
+  "& .date": {
+    marginBottom: "0.5rem",
+  },
+  "& .location": {
+    fontWeight: 400,
+  }
+});
+
+const DownArrow = styled("div", {
+  position: "absolute",
+  bottom: "30px",
+  left: "50%",
+  transform: "translateX(-50%)",
+  zIndex: 2,
+  animation: "bounce 2s infinite",
+  cursor: "pointer",
+  color: "var(--white)",
+  fontSize: "2rem",
+  "@keyframes bounce": {
+    "0%, 20%, 50%, 80%, 100%": { transform: "translateY(0) translateX(-50%)" },
+    "40%": { transform: "translateY(-20px) translateX(-50%)" },
+    "60%": { transform: "translateY(-10px) translateX(-50%)" }
+  }
 });
 
 type TitleProps = {
@@ -59,22 +109,31 @@ type TitleProps = {
 };
 
 export default function Title({ data }: TitleProps) {
+  const scrollToContent = () => {
+    window.scrollTo({
+      top: window.innerHeight,
+      behavior: "smooth"
+    });
+  };
+
   return (
     <Layout>
       <VideoBackground autoPlay loop muted playsInline={true}>
         <source src="./asset/main.MP4" type="video/mp4" />
       </VideoBackground>
       <TitleWrapper>
-        <WeddingInvitation>WEDDING INVITATION</WeddingInvitation>
+        <WeddingInvitation>Wedding Invitation</WeddingInvitation>
         <GroomBride>
-          {data?.groom?.name} &#38; {data?.bride?.name}
+          {data?.groom?.name} & {data?.bride?.name}
         </GroomBride>
         <Schedule>
-          {data?.date}
-          <br />
-          {data?.location}
+          <div className="date">{data?.date}</div>
+          <div className="location">{data?.location}</div>
         </Schedule>
       </TitleWrapper>
+      <DownArrow onClick={scrollToContent}>
+        <i className="fas fa-chevron-down"></i>
+      </DownArrow>
     </Layout>
   );
 }
