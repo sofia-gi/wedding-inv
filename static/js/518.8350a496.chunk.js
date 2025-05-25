@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkm_wedding_inv=self.webpackChunkm_wedding_inv||[]).push([[518],{5518:(e,d,n)=>{n.r(d),n.d(d,{default:()=>s});n(5043);var i=n(579);const s=()=>(0,i.jsx)("div",{children:"About Page"})}}]);
+//# sourceMappingURL=518.8350a496.chunk.js.map
