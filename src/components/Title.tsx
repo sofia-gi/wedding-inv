@@ -40,7 +40,7 @@ const TitleWrapper = styled("div", {
 const BackgroundImage = styled("div", {
   width: "100%",
   height: "100%",
-  backgroundImage: "url('./asset/mainImg.jpg')",
+  backgroundImage: "url('./asset/og_title_1.JPG')",
   backgroundSize: "cover",
   backgroundPosition: "center",
   filter: "brightness(0.9)",
@@ -78,8 +78,8 @@ const GroomBride = styled("p", {
 const Schedule = styled("div", {
   position: "absolute",
   fontSize: "1.1rem",
-  marginTop: "127%",
-  marginLeft: "5%",
+  marginTop: "399px",
+  marginLeft: "8px",
   lineHeight: 1.6,
   fontWeight: 300,
   "& .date": {
@@ -127,10 +127,10 @@ export default function Title({ data }: TitleProps) {
     <Layout>
       <BackgroundImage />
       <TitleWrapper>
-        <WeddingInvitation>Wedding Invitation</WeddingInvitation>
+        {/* <WeddingInvitation>Wedding Invitation</WeddingInvitation>
         <GroomBride>
           {data?.groom?.name} & {data?.bride?.name}
-        </GroomBride>
+        </GroomBride> */}
         <Schedule>
           <div className="date">{data?.date}</div>
           <div className="location">{data?.location}</div>
